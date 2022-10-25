@@ -19,7 +19,7 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const particleTexture = textureLoader.load('/textures/particles/8.png')
+const particleTexture = textureLoader.load('/textures/particles/2.png')
 
 /**
  * Particles
@@ -28,28 +28,37 @@ const particleTexture = textureLoader.load('/textures/particles/8.png')
 const particlesGeometry = new THREE.BufferGeometry(1, 32,32)
 const count = 20000
 
-const position = new Float32Array(count * 3)
+const positions = new Float32Array(count * 3)
+const colors = new Float32Array(count * 3)
 
 for (let i = 0; i < count * 3; i++) {
-    position[i] = (Math.random() - 0.5) * 10
+    positions[i] = (Math.random() - 0.5) * 10
+    colors[i] = Math.random()
+
 }
 
 particlesGeometry.setAttribute(
     'position',
-    new THREE.BufferAttribute(position, 3)
-    )
+    new THREE.BufferAttribute(positions, 3)
+)
+
+particlesGeometry.setAttribute(
+    'color',
+    new THREE.BufferAttribute(colors, 3)
+)
 
 // Material
 const particlesMaterial = new THREE.PointsMaterial({
     size: 0.1,
     sizeAttenuation: true,
-    color: '#ffaacc',
+    // color: '#ffaacc',
     transparent: true,
     alphaMap: particleTexture,
     // alphaTest: 0.1,
-    // depthTest: false
+    // depthTest: false,
     depthWrite: false,
-    blending: THREE.AdditiveBlending
+    blending: THREE.AdditiveBlending,
+    vertexColors: true
 })
 
 // Points
