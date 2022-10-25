@@ -26,7 +26,7 @@ const particleTexture = textureLoader.load('/textures/particles/8.png')
  */
 // Geometry
 const particlesGeometry = new THREE.BufferGeometry(1, 32,32)
-const count = 5000
+const count = 20000
 
 const position = new Float32Array(count * 3)
 
@@ -48,7 +48,8 @@ const particlesMaterial = new THREE.PointsMaterial({
     alphaMap: particleTexture,
     // alphaTest: 0.1,
     // depthTest: false
-    depthWrite: false
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
 })
 
 // Points
