@@ -24,11 +24,23 @@ const textureLoader = new THREE.TextureLoader()
  * Particles
  */
 // Geometry
-const particlesGeometry = new THREE.SphereGeometry(1, 32,32)
+const particlesGeometry = new THREE.BufferGeometry(1, 32,32)
+const count = 5000
+
+const position = new Float32Array(count * 3)
+
+for (let i = 0; i < count * 3; i++) {
+    position[i] = (Math.random() - 0.5) * 10
+}
+
+particlesGeometry.setAttribute(
+    'position',
+    new THREE.BufferAttribute(position, 3)
+    )
 
 // Material
 const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.02,
+    size: 0.01,
     sizeAttenuation: true
 })
 
